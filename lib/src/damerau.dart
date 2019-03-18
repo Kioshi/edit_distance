@@ -1,9 +1,8 @@
 // Copyright (c) 2016, Kwang Yul Seo. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'package:quiver_iterables/iterables.dart';
-
 import './base.dart';
+import 'dart:math' as Math;
 
 /// Implementation of Damerau-Levenshtein distance with transposition (also
 /// sometimes calls unrestricted Damerau-Levenshtein distance).
@@ -17,6 +16,24 @@ import './base.dart';
 /// This is not to be confused with the optimal string alignment distance, which
 /// is an extension where no substring can be edited more than once.
 class Damerau implements StringDistance {
+
+  int min(List<int> values)
+  {
+    if (values == null || values.isEmpty)
+    {
+      throw Exception("Can not use min without non empy values array!");
+    }
+
+    int min = values[0];
+
+    for (int i = 0; i < values.length; i++)
+    {
+      min = Math.min(min, values[i]);
+    }
+
+    return min;
+  }
+
   @override
   int distance(String s1, String s2) {
     int inf = s1.length + s2.length;
